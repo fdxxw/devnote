@@ -9,7 +9,7 @@
 
 <!-- /MarkdownTOC -->
 
-### 一.常用Sql{#一常用sql}
+### 一.常用Sql
 #### 1.删除重复数据
 ```sql
     delete from *tableName* a where a.ctid = any(array (select ctid from (select row_number() over 
