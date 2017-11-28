@@ -1,15 +1,15 @@
 <!-- MarkdownTOC -->
 
-- [一.常用Sql](#user-content-一常用sql)
-    - [1.删除重复数据](#user-content-1删除重复数据)
-    - [2.单引号转义](#user-content-2单引号转义)
-    - [3.dblink\(跨库查询\)](#user-content-3dblink跨库查询)
-- [二.存储过程](#user-content-二存储过程)
-    - [1.创建存储过程](#user-content-1创建存储过程)
+- [一.常用Sql](#一常用sql)
+    - [1.删除重复数据](#1删除重复数据)
+    - [2.单引号转义](#2单引号转义)
+    - [3.dblink\(跨库查询\)](#3dblink跨库查询)
+- [二.存储过程](#二存储过程)
+    - [1.创建存储过程](#1创建存储过程)
 
 <!-- /MarkdownTOC -->
 
-### 一.常用Sql
+### 一.常用Sql{#一常用sql}
 #### 1.删除重复数据
 ```sql
     delete from *tableName* a where a.ctid = any(array (select ctid from (select row_number() over 
