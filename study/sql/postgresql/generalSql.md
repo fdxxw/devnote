@@ -21,12 +21,13 @@
 
 eg. 
 ```sql
-    update table set city = E'Xi\'an';
+    update city set name = E'Xi\'an';
 ```
 
 #### 3.dblink(跨库查询)
 ```sql
-    select * from dblink ('hostaddr=127.0.0.1 port=5432 dbname=database user=postgres password=123456',
+    select * from dblink ('hostaddr=127.0.0.1 port=5432 dbname=database 
+       user=postgres password=123456',
     E'select id, name from city where name = \'Beijing\'') t (id varchar, name varchar);
 ```
 ### 二.存储过程
