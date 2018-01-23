@@ -1,21 +1,4 @@
-<!-- MarkdownTOC -->
 
-- [1. 常用命令](#1-常用命令)
-    - [1.1 查看进程](#11-查看进程)
-    - [1.2 查看并重置代理](#12-查看并重置代理)
-    - [1.3 备份还原](#13-备份还原)
-    - [1.4 挂载](#14-挂载)
-    - [1.5 查看分区UUID](#15-查看分区UUID)
-    - [1.6 rsync ssh远程数据同步](#16-rsync-ssh远程数据同步)
-    - [1.7 开放端口](#17-开放端口)
-    - [1.8 查看当前目录下所有文件和目录的大小](#18-查看当前目录下所有文件和目录的大小)
-- [2. 软件设置](#2-软件设置)
-    - [2.1 vim](#21-vim)
-    - [2.2 delete bom](#22-delete-bom)
-    - [2.3 ssh](#23-ssh)
-    - [2.3.1 ssh 配置文件路径](#231-ssh-配置文件路径)
-
-<!-- /MarkdownTOC -->
 
 #### 1. 常用命令
 ##### 1.1 查看进程
@@ -73,6 +56,50 @@ iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 580 -j ACCEPT
 du * --block-size=M
 ```
 
+##### 1.9 find
+
+###### 1.9.1 查找文件
+```sh
+find ./ -name "*aaa*" -size 10M  #按文件名和文件大小查找
+
+find ./ -name "*aaa*" -exec grep "bbb" {} \;   #查找指定文件并查找文件内容
+
+find ./ -type f -name "*properties*" -exec bash -c ' mv $0 `echo $0 | sed "s/properties/js/g"` ' {} \;  # 批量修改文件名
+
+```
+
+##### 1.10 分区
+
+###### 1.10.1 swap开和关
+关闭swap交换分区
+```
+swapoff /dev/sda*
+```
+开启swap交换分区
+```
+swapon /dev/sda*
+```
+
+##### 1.11 排序
+
+###### 1.11.1 系统资源使用排序
+```sh
+ps -aux | sort -k 5n | tail -5  #查看进程虚拟内存使用并列出最多的5个
+
+du --block-size=G * | sort -t ' ' -n -k 1n | tail -5  #输出5个最大的文件或目录, -t：分隔符　 -n : 数值排序 -k : 以第几列排序
+```
+
+##### 1.12 连接
+```sh
+ln -s from to #软连接
+
+ln -d from to #硬链接
+```
+
+##### 1.13 查看硬件信息
+```sh
+lshw
+```
 #### 2. 软件设置
 ##### 2.1 vim 
 缩进：在用户主目录下的.vimrc文件中加上一下代码
@@ -84,7 +111,7 @@ set expandtab "expandtab --缩进用空格来表示 noexpandtab --缩进用制�
 ```
 
 字符串替换
-:%s#127.0.0.1:80#192.168.1.1:8080
+>:%s#127.0.0.1:80#192.168.1.1:8080
 
 ##### 2.2 delete bom 
 ```sh
