@@ -1,4 +1,32 @@
 
+<!-- MarkdownTOC -->
+
+- [1. 常用命令](#1-常用命令)
+    - [1.1 查看进程](#11-查看进程)
+    - [1.2 查看并重置代理](#12-查看并重置代理)
+    - [1.3 备份还原](#13-备份还原)
+    - [1.4 挂载](#14-挂载)
+    - [1.5 查看分区UUID](#15-查看分区UUID)
+    - [1.6 rsync ssh远程数据同步](#16-rsync-ssh远程数据同步)
+    - [1.7 开放端口](#17-开放端口)
+    - [1.8 查看当前目录下所有文件和目录的大小](#18-查看当前目录下所有文件和目录的大小)
+    - [1.9 find](#19-find)
+        - [1.9.1 查找文件](#191-查找文件)
+    - [1.10 分区](#110-分区)
+        - [1.10.1 swap开和关](#1101-swap开和关)
+    - [1.11 排序](#111-排序)
+        - [1.11.1 系统资源使用排序](#1111-系统资源使用排序)
+    - [1.12 连接](#112-连接)
+    - [1.13 查看硬件信息](#113-查看硬件信息)
+- [2. 软件使用](#2-软件使用)
+    - [2.1 vim](#21-vim)
+    - [2.2 delete bom](#22-delete-bom)
+    - [2.3 ssh](#23-ssh)
+        - [2.3.1 ssh 配置文件路径](#231-ssh-配置文件路径)
+    - [2.4 curl](#24-curl)
+        - [2.4.1 curl http post json data](#241-curl-http-post-json-data)
+
+<!-- /MarkdownTOC -->
 
 #### 1. 常用命令
 ##### 1.1 查看进程
@@ -42,7 +70,7 @@ blkid
 
 ##### 1.6 rsync ssh远程数据同步
 ```sh
-rsync -Pv -e 'ssh -p 2000' root@111.111.111.111:/backup.tar.gz ./backup.tar.gz
+rsync -avzP -e 'ssh -p 2000' root@111.111.111.111:/backup.tar.gz ./backup.tar.gz
 ```
 ##### 1.7 开放端口
 ```
@@ -65,6 +93,8 @@ find ./ -name "*aaa*" -size 10M  #按文件名和文件大小查找
 find ./ -name "*aaa*" -exec grep "bbb" {} \;   #查找指定文件并查找文件内容
 
 find ./ -type f -name "*properties*" -exec bash -c ' mv $0 `echo $0 | sed "s/properties/js/g"` ' {} \;  # 批量修改文件名
+#统计字符串出现的次数
+grep -o  'objStr1\|objStr2'  filename|wc -l
 
 ```
 
@@ -100,7 +130,7 @@ ln -d from to #硬链接
 ```sh
 lshw
 ```
-#### 2. 软件设置
+#### 2. 软件使用
 ##### 2.1 vim 
 缩进：在用户主目录下的.vimrc文件中加上一下代码
 ```
@@ -120,7 +150,14 @@ find . -type f   -exec  sed -i 's/\xEF\xBB\xBF//' {} \
 
 ##### 2.3 ssh
 
-##### 2.3.1 ssh 配置文件路径
+###### 2.3.1 ssh 配置文件路径
 ```
 /etc/ssh/
+```
+
+##### 2.4 curl 
+
+###### 2.4.1 curl http post json data
+```
+curl -H 'Content-type : application/json' -H 'Accept-type : application/json' -X POST http://localhost:8080/api/v1/query --data '{}'  
 ```

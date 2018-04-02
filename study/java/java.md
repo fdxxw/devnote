@@ -12,6 +12,8 @@
 - [常见异常](#常见异常)
     - [1. Tomcat部署异常](#1-Tomcat部署异常)
         - [1.1 java.net.UnknownHostException:xxx:xxx: 未知的名称或服务](#11-javanetUnknownHostExceptionxxxxxx-未知的名称或服务)
+- [关键字](#关键字)
+    - [transient](#transient)
 
 <!-- /MarkdownTOC -->
 ## JAVA 基础知识
@@ -58,3 +60,8 @@ JAVA_OPTS="-Xms512m -Xmx1536m -Xss1024K -XX:PermSize=256m
     hostname -i #查看host映射
     vim /etc/hosts  #维护host映射关系
 ```
+
+## 关键字
+
+### transient
+> 使声明的属性不进行序列化, 不能持久化, 只能修饰类的属性
